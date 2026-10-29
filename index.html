@@ -66,6 +66,25 @@ footer{text-align:center;padding:30px;color:#9ca6c4}
 </div>
 <p id="empty" hidden>No matching videos. Try another search.</p>
 </main>
+<section class="video-search">
+  <input
+    type="search"
+    id="searchInput"
+    placeholder="Search videos..."
+    oninput="filterVideos()"
+  >
+
+  <div class="categories">
+    <button onclick="showCategory('All')">All</button>
+    <button onclick="showCategory('Gaming')">Gaming</button>
+    <button onclick="showCategory('Tech')">Tech</button>
+    <button onclick="showCategory('Comedy')">Comedy</button>
+    <button onclick="showCategory('Music')">Music</button>
+    <button onclick="showCategory('Education')">Education</button>
+  </div>
+
+  <div id="videoResults"></div>
+</section>
 <footer>ClipNest · Discover videos on their original platforms.</footer>
 <script>
 let category="All";
