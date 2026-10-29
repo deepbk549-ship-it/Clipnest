@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ClipNest - Discover Videos</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0b1020;color:#f4f5ff;font-family:Arial,sans-serif}
+header{padding:20px;background:#151b30;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.logo{font-size:25px;font-weight:bold;color:#a99aff}
+input{padding:12px;border-radius:10px;border:1px solid #39415c;background:#202842;color:white;width:100%;max-width:320px}
+main{padding:24px;max-width:1000px;margin:auto}
+h1{font-size:clamp(32px,7vw,52px);margin-bottom:8px}
+p{color:#b8c0d9;line-height:1.6}
+nav{display:flex;gap:10px;flex-wrap:wrap;margin:24px 0}
+button{padding:10px 15px;border:1px solid #414969;border-radius:20px;background:#202842;color:white;cursor:pointer}
+button.active{background:#7562e8}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.card{background:#171e33;border:1px solid #303954;border-radius:16px;overflow:hidden}
+.card img{width:100%;aspect-ratio:16/9;object-fit:cover}
+.info{padding:15px}
+.info h3{margin:5px 0}
+.tag{color:#b9aaff;font-size:13px}
+a{color:#b9aaff}
+footer{text-align:center;padding:30px;color:#9ca6c4}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">▶ ClipNest</div>
+<input id="search" placeholder="Search videos..." aria-label="Search videos">
+</header>
+<main>
+<h1>Good videos.<br>Less searching.</h1>
+<p>Discover interesting videos by topic. Find something fun, learn something new, and watch on the original platform.</p>
+<nav>
+<button class="active" data-cat="All">✨ All videos</button>
+<button data-cat="Gaming">🎮 Gaming</button>
+<button data-cat="Learning">🧠 Learning</button>
+<button data-cat="Animation">🎨 Animation</button>
+</nav>
+<h2>Discover videos</h2>
+<div class="grid" id="videos">
+<article class="card" data-cat="Gaming">
+<a href="https://www.youtube.com/results?search_query=gaming+videos" target="_blank" rel="noopener">
+<img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600" alt="Gaming setup">
+</a>
+<div class="info"><span class="tag">GAMING</span><h3>Gaming videos</h3><p>Discover gameplay and gaming tips.</p><a href="https://www.youtube.com/results?search_query=gaming+videos" target="_blank" rel="noopener">Explore videos ↗</a></div>
+</article>
+<article class="card" data-cat="Learning">
+<a href="https://www.youtube.com/results?search_query=computer+tips+for+beginners" target="_blank" rel="noopener">
+<img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600" alt="Computer and learning">
+</a>
+<div class="info"><span class="tag">LEARNING</span><h3>Computer tips</h3><p>Learn useful computer skills and fixes.</p><a href="https://www.youtube.com/results?search_query=computer+tips+for+beginners" target="_blank" rel="noopener">Explore videos ↗</a></div>
+</article>
+<article class="card" data-cat="Animation">
+<a href="https://www.youtube.com/results?search_query=3D+cartoon+animation" target="_blank" rel="noopener">
+<img src="https://images.unsplash.com/photo-1535223289827-42f1e9919769?w=600" alt="Digital art">
+</a>
+<div class="info"><span class="tag">ANIMATION</span><h3>Animation</h3><p>Explore cartoon and creative videos.</p><a href="https://www.youtube.com/results?search_query=3D+cartoon+animation" target="_blank" rel="noopener">Explore videos ↗</a></div>
+</article>
+</div>
+<p id="empty" hidden>No matching videos. Try another search.</p>
+</main>
+<footer>ClipNest · Discover videos on their original platforms.</footer>
+<script>
+let category="All";
+const cards=[...document.querySelectorAll(".card")];
+function filter(){
+const q=document.querySelector("#search").value.toLowerCase();
+let shown=0;
+cards.forEach(card=>{
+const ok=(category==="All"||card.dataset.cat===category)&&card.innerText.toLowerCase().includes(q);
+card.hidden=!ok;
+if(ok)shown++;
+});
+document.querySelector("#empty").hidden=shown>0;
+}
+document.querySelector("#search").addEventListener("input",filter);
+document.querySelectorAll("nav button").forEach(btn=>{
+btn.addEventListener("click",()=>{
+category=btn.dataset.cat;
+document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b===btn));
+filter();
+});
+});
+</script>
+</body>
+</html>
