@@ -89,40 +89,5 @@ filter();
 });
 });
 </script>
-<script>
-const videoItems = [
-  { name: "Gaming videos", category: "Gaming" },
-  { name: "Computer tips and fixes", category: "Tech" },
-  { name: "Funny videos", category: "Comedy" },
-  { name: "Music videos", category: "Music" },
-  { name: "Learning videos", category: "Education" }
-];
-
-function showCategory(category) {
-  const results = document.getElementById("videoResults");
-  const filtered = category === "All"
-    ? videoItems
-    : videoItems.filter(v => v.category === category);
-
-  results.innerHTML = filtered.map(v =>
-    `<p><a href="https://www.youtube.com/results?search_query=${encodeURIComponent(v.name)}" target="_blank" rel="noopener">${v.name}</a></p>`
-  ).join("");
-}
-
-function filterVideos() {
-  const query = document.getElementById("searchInput").value.toLowerCase();
-  const results = document.getElementById("videoResults");
-  const filtered = videoItems.filter(v =>
-    v.name.toLowerCase().includes(query) ||
-    v.category.toLowerCase().includes(query)
-  );
-
-  results.innerHTML = filtered.map(v =>
-    `<p><a href="https://www.youtube.com/results?search_query=${encodeURIComponent(v.name)}" target="_blank" rel="noopener">${v.name}</a></p>`
-  ).join("");
-}
-
-showCategory("All");
-</script>
 </body>
 </html>
